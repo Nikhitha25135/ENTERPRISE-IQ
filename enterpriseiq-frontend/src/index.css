@@ -1,0 +1,57 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-paper text-ink font-body antialiased;
+    font-feature-settings: 'ss01' 1, 'cv11' 1;
+  }
+  h1, h2, h3, h4 {
+    @apply font-display text-ink;
+    letter-spacing: -0.01em;
+  }
+  ::selection {
+    background: #A9803F;
+    color: #EFEEE7;
+  }
+  :focus-visible {
+    outline: 2px solid #A9803F;
+    outline-offset: 2px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer components {
+  .eyebrow {
+    @apply font-mono text-[11px] uppercase tracking-[0.18em] text-brass-600;
+  }
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-[3px] bg-navy px-5 py-3 font-body text-[14px] font-medium text-paper transition-colors hover:bg-navy-800 active:bg-navy-900 disabled:opacity-50 disabled:pointer-events-none;
+  }
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-[3px] border border-ink/15 bg-transparent px-5 py-3 font-body text-[14px] font-medium text-ink transition-colors hover:border-ink/35 hover:bg-ink/[0.03] disabled:opacity-50 disabled:pointer-events-none;
+  }
+  .btn-brass {
+    @apply inline-flex items-center justify-center gap-2 rounded-[3px] bg-brass px-5 py-3 font-body text-[14px] font-medium text-navy-900 transition-colors hover:bg-brass-400 disabled:opacity-50 disabled:pointer-events-none;
+  }
+  .field-label {
+    @apply mb-1.5 block font-mono text-[11px] uppercase tracking-[0.12em] text-slate;
+  }
+  .field-input {
+    @apply w-full rounded-[3px] border border-ink/15 bg-white/60 px-3.5 py-2.5 font-body text-[14.5px] text-ink placeholder:text-slate-300 outline-none transition-colors focus:border-brass focus:bg-white;
+  }
+  .card {
+    @apply rounded-[4px] border border-ink/[0.08] bg-white/70 shadow-card;
+  }
+}

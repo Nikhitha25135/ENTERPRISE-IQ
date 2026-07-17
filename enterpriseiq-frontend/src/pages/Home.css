@@ -1,0 +1,177 @@
+/* ==========================================================================
+   Home.css
+   Color palette
+   Primary    #1E1B4B
+   Accent     #7C3AED
+   Secondary  #A78BFA
+   Background #FAFAFA
+   Card       #FFFFFF
+   Border     #E5E7EB
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+
+:root {
+  --color-primary: #1E1B4B;
+  --color-accent: #7C3AED;
+  --color-secondary: #A78BFA;
+  --color-bg: #FAFAFA;
+  --color-bg-dim: #F1EFFB;
+  --color-card: #FFFFFF;
+  --color-border: #E5E7EB;
+
+  --color-ink: var(--color-primary);
+  --color-slate: #52525B;
+  --color-slate-light: #A1A1AA;
+
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', 'SFMono-Regular', Menlo, monospace;
+}
+
+/* ---------------------------------------------------------------------- */
+/* Base                                                                    */
+/* ---------------------------------------------------------------------- */
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ---------------------------------------------------------------------- */
+/* Typography helpers                                                      */
+/* ---------------------------------------------------------------------- */
+
+.font-display { font-family: var(--font-display); }
+.font-body    { font-family: var(--font-body); }
+.font-mono    { font-family: var(--font-mono); }
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+
+/* On dark (navy) sections, the eyebrow should sit on the lighter accent */
+.bg-navy-900 .eyebrow {
+  color: var(--color-secondary);
+}
+
+/* ---------------------------------------------------------------------- */
+/* Surface / color utilities referenced in Home.jsx                        */
+/* ---------------------------------------------------------------------- */
+
+.bg-paper       { background-color: var(--color-bg); }
+.bg-paper-dim\/60 { background-color: color-mix(in srgb, var(--color-bg-dim) 60%, transparent); }
+.bg-navy-900    { background-color: var(--color-primary); }
+
+.text-ink       { color: var(--color-ink); }
+.text-navy-400  { color: #5B55A6; }
+.text-slate     { color: var(--color-slate); }
+.text-slate-300 { color: var(--color-slate-light); }
+.text-paper     { color: var(--color-bg); }
+.text-paper\/45 { color: color-mix(in srgb, var(--color-bg) 45%, transparent); }
+.text-paper\/60 { color: color-mix(in srgb, var(--color-bg) 60%, transparent); }
+.text-paper\/70 { color: color-mix(in srgb, var(--color-bg) 70%, transparent); }
+.text-brass-400\/80 { color: color-mix(in srgb, var(--color-secondary) 80%, transparent); }
+.text-brass-400 { color: var(--color-secondary); }
+.text-brass-600 { color: var(--color-accent); }
+
+.border-ink\/\[0\.07\], .border-ink\/\[0\.08\] { border-color: color-mix(in srgb, var(--color-ink) 8%, transparent); }
+.border-paper\/15 { border-color: color-mix(in srgb, var(--color-bg) 15%, transparent); }
+.bg-ink\/\[0\.08\] { background-color: color-mix(in srgb, var(--color-ink) 8%, transparent); }
+
+/* ---------------------------------------------------------------------- */
+/* Buttons                                                                 */
+/* ---------------------------------------------------------------------- */
+
+.btn-primary,
+.btn-secondary,
+.btn-brass {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 26px;
+  border-radius: 3px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  transition: background-color 0.18s ease, color 0.18s ease, border-color 0.18s ease, transform 0.12s ease;
+}
+
+.btn-primary {
+  background-color: var(--color-primary);
+  color: #FFFFFF;
+  border: 1px solid var(--color-primary);
+}
+.btn-primary:hover {
+  background-color: #15123A;
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  background-color: transparent;
+  color: var(--color-ink);
+  border: 1px solid var(--color-border);
+}
+.btn-secondary:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+/* Sections on the dark navy background need a lighter secondary button */
+.bg-navy-900 .btn-secondary {
+  color: #FFFFFF;
+  border-color: color-mix(in srgb, #FFFFFF 25%, transparent);
+}
+.bg-navy-900 .btn-secondary:hover {
+  border-color: var(--color-secondary);
+  color: var(--color-secondary);
+}
+
+.btn-brass {
+  background-color: var(--color-accent);
+  color: #FFFFFF;
+  border: 1px solid var(--color-accent);
+}
+.btn-brass:hover {
+  background-color: #6D28D9;
+  transform: translateY(-1px);
+}
+
+/* ---------------------------------------------------------------------- */
+/* Cards                                                                   */
+/* ---------------------------------------------------------------------- */
+
+.card {
+  background-color: var(--color-card);
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease, transform 0.18s ease;
+}
+
+.card:hover {
+  border-color: var(--color-secondary);
+  box-shadow: 0 8px 24px -12px color-mix(in srgb, var(--color-primary) 25%, transparent);
+  transform: translateY(-2px);
+}
+
+/* ---------------------------------------------------------------------- */
+/* Misc                                                                    */
+/* ---------------------------------------------------------------------- */
+
+a {
+  color: inherit;
+}
+
+::selection {
+  background-color: var(--color-secondary);
+  color: #FFFFFF;
+}
