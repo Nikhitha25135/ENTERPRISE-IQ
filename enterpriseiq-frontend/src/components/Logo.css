@@ -1,0 +1,14 @@
+/* ==========================================================================
+   Logo.css
+   ========================================================================== */
+
+.logo-wordmark {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.logo-wordmark.dark { color: var(--slate-900); }
+.logo-wordmark.light { color: var(--paper); }
+
+.logo-accent { color: var(--teal-400); }

@@ -1,8 +1,9 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import Sidebar from './components/Sidebar';
 import ProtectedRoute from './components/ProtectedRoute';
-import { AuthProvider } from './context/AuthContext';
+import { AuthProvider, useAuth } from './context/AuthContext';
 import { ToastProvider } from './context/ToastContext';
 
 import Home from './pages/Home';
@@ -17,7 +18,22 @@ import Profile from './pages/Profile';
 import Users from './pages/Users';
 import NotFound from './pages/NotFound';
 
+const APP_ROUTES = ['/dashboard', '/documents', '/chat', '/profile', '/users'];
+
 function Layout({ children }) {
+  const { user } = useAuth();
+  const location = useLocation();
+  const isAppRoute = user && APP_ROUTES.some((r) => location.pathname.startsWith(r));
+
+  if (isAppRoute) {
+    return (
+      <div className="flex min-h-screen bg-paper">
+        <Sidebar />
+        <main className="min-w-0 flex-1">{children}</main>
+      </div>
+    );
+  }
+
   return (
     <div className="flex min-h-screen flex-col bg-paper">
       <Navbar />

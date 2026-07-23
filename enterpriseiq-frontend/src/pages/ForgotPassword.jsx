@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Logo from '../components/Logo';
 import apiClient from '../lib/api';
+import './ForgotPassword.css';
 
 export default function ForgotPassword() {
   const [email, setEmail] = useState('');
@@ -24,15 +25,15 @@ export default function ForgotPassword() {
   };
 
   return (
-    <div className="flex min-h-[calc(100vh-73px)] items-center justify-center bg-paper px-6 py-16">
+    <div className="auth-shell flex items-center justify-center px-6 py-16">
       <div className="w-full max-w-[400px]">
         <div className="mb-8 flex justify-center">
           <Link to="/"><Logo /></Link>
         </div>
-        <div className="card p-8">
+        <div className="auth-card p-8">
           {sent ? (
             <div className="text-center">
-              <div className="mx-auto flex h-11 w-11 items-center justify-center rounded-full bg-verified-100 text-verified">
+              <div className="auth-success-badge mx-auto flex h-11 w-11 items-center justify-center rounded-full">
                 ✓
               </div>
               <h1 className="mt-4 font-display text-[21px] font-semibold text-ink">Check your inbox</h1>
@@ -43,8 +44,8 @@ export default function ForgotPassword() {
             </div>
           ) : (
             <>
-              <p className="eyebrow text-center">Reset password</p>
-              <h1 className="mt-2 text-center font-display text-[22px] font-semibold text-ink">Forgot your password?</h1>
+              <p className="auth-kicker">Reset password</p>
+              <h1 className="auth-title mt-2 text-[22px]">Forgot your password?</h1>
               <p className="mt-2 text-center font-body text-[13.5px] text-slate">
                 Enter your email and we'll send a reset link.
               </p>
@@ -65,7 +66,7 @@ export default function ForgotPassword() {
                 </div>
 
                 {error && (
-                  <p className="rounded-[3px] border border-rust/25 bg-rust/[0.06] px-3 py-2 font-body text-[13px] text-rust">
+                  <p className="auth-error px-3 py-2 font-body text-[13px]">
                     {error}
                   </p>
                 )}
@@ -77,7 +78,7 @@ export default function ForgotPassword() {
             </>
           )}
         </div>
-        <p className="mt-6 text-center font-body text-[13.5px] text-slate">
+        <p className="auth-footer-text mt-6 font-body text-[13.5px]">
           <Link to="/login" className="font-medium text-ink underline underline-offset-2">Back to sign in</Link>
         </p>
       </div>

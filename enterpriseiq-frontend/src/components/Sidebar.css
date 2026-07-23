@@ -1,0 +1,126 @@
+/* ==========================================================================
+   Sidebar.css — persistent nav for authenticated app pages.
+   ========================================================================== */
+
+.app-sidebar {
+  display: flex;
+  flex-direction: column;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  width: 248px;
+  flex-shrink: 0;
+  background: linear-gradient(185deg, var(--teal-950) 0%, #0A2E2C 100%);
+  border-right: 1px solid rgba(246, 248, 249, 0.08);
+}
+
+.sidebar-link {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  border-radius: 5px;
+  padding: 0.6rem 0.75rem;
+  font-family: var(--font-body);
+  font-size: 13.5px;
+  font-weight: 500;
+  color: rgba(246, 248, 249, 0.55);
+  transition: background-color 0.15s var(--ease-out), color 0.15s var(--ease-out);
+}
+
+.sidebar-link:hover {
+  background: rgba(246, 248, 249, 0.06);
+  color: var(--paper);
+}
+
+.sidebar-link.active {
+  background: rgba(43, 182, 115, 0.14);
+  color: var(--teal-300);
+}
+
+.sidebar-link-icon {
+  display: inline-flex;
+  height: 18px;
+  width: 18px;
+  flex-shrink: 0;
+}
+
+.sidebar-user-card {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  border-radius: 6px;
+  border: 1px solid rgba(246, 248, 249, 0.1);
+  background: rgba(246, 248, 249, 0.04);
+  padding: 0.6rem 0.65rem;
+}
+
+.sidebar-user-avatar {
+  display: flex;
+  height: 32px;
+  width: 32px;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--teal-400);
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--teal-950);
+}
+
+.sidebar-signout {
+  display: flex;
+  height: 26px;
+  width: 26px;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  color: rgba(246, 248, 249, 0.45);
+  transition: color 0.15s var(--ease-out), background-color 0.15s var(--ease-out);
+}
+.sidebar-signout:hover {
+  color: var(--paper);
+  background: rgba(246, 248, 249, 0.08);
+}
+.sidebar-signout svg { height: 15px; width: 15px; }
+
+.sidebar-mobile-toggle {
+  position: fixed;
+  top: 14px;
+  left: 14px;
+  z-index: 60;
+  display: flex;
+  height: 38px;
+  width: 38px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  background: var(--teal-950);
+  color: var(--paper);
+  font-size: 18px;
+  box-shadow: 0 4px 12px -4px rgba(8, 38, 37, 0.5);
+}
+
+.sidebar-scrim {
+  position: fixed;
+  inset: 0;
+  z-index: 55;
+  background: rgba(8, 38, 37, 0.5);
+}
+
+@media (max-width: 767px) {
+  .app-sidebar {
+    position: fixed;
+    z-index: 58;
+    left: 0;
+    top: 0;
+    transform: translateX(-100%);
+    transition: transform 0.22s var(--ease-out);
+    box-shadow: 0 0 40px rgba(8, 38, 37, 0.4);
+  }
+  .app-sidebar.is-open {
+    transform: translateX(0);
+  }
+}

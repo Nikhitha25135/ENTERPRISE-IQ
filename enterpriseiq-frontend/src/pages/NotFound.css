@@ -1,0 +1,17 @@
+/* ==========================================================================
+   NotFound.css — 404 screen.
+   ========================================================================== */
+
+.notfound-code {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--teal-500);
+}
+
+.notfound-title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  color: var(--slate-900);
+}

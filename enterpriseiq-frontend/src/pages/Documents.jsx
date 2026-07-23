@@ -1,18 +1,44 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import apiClient from '../lib/api';
 import { useToast } from '../context/ToastContext';
-
-const STATUS_STYLES = {
-  searchable: 'text-verified bg-verified-100',
-  processing: 'text-brass-600 bg-brass/[0.12]',
-  uploaded: 'text-slate bg-ink/[0.06]',
-  failed: 'text-rust bg-rust/[0.08]',
-};
+import './Documents.css';
 
 function formatSize(bytes) {
   if (bytes < 1024) return `${bytes} B`;
   if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(0)} KB`;
   return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
+}
+
+const FILE_TYPES = {
+  pdf: { label: 'PDF', kind: 'pdf' },
+  doc: { label: 'DOC', kind: 'word' },
+  docx: { label: 'DOC', kind: 'word' },
+  xls: { label: 'XLS', kind: 'excel' },
+  xlsx: { label: 'XLS', kind: 'excel' },
+  csv: { label: 'CSV', kind: 'excel' },
+  ppt: { label: 'PPT', kind: 'slides' },
+  pptx: { label: 'PPT', kind: 'slides' },
+  png: { label: 'IMG', kind: 'image' },
+  jpg: { label: 'IMG', kind: 'image' },
+  jpeg: { label: 'IMG', kind: 'image' },
+  txt: { label: 'TXT', kind: 'text' },
+};
+
+function getFileType(fileName = '') {
+  const ext = fileName.split('.').pop()?.toLowerCase();
+  return FILE_TYPES[ext] || { label: ext ? ext.slice(0, 3).toUpperCase() : 'FILE', kind: 'default' };
+}
+
+export function FileTypeIcon({ fileName }) {
+  const { kind } = getFileType(fileName);
+  return (
+    <span className={`file-type-icon ${kind}`} aria-hidden="true">
+      <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M5.5 2.5h6L15 6v10.5a1 1 0 0 1-1 1h-8.5a1 1 0 0 1-1-1v-13a1 1 0 0 1 1-1Z" stroke="currentColor" strokeWidth="1.4" strokeLinejoin="round" />
+        <path d="M11.5 2.5V6H15" stroke="currentColor" strokeWidth="1.4" strokeLinejoin="round" />
+      </svg>
+    </span>
+  );
 }
 
 export default function Documents() {
@@ -98,7 +124,7 @@ export default function Documents() {
   return (
     <div className="mx-auto max-w-7xl px-6 py-12 lg:px-10">
       <p className="eyebrow">Library</p>
-      <h1 className="mt-2 font-display text-[30px] font-semibold text-ink">Documents</h1>
+      <h1 className="docs-title mt-2 text-[30px]">Documents</h1>
       <p className="mt-2 max-w-lg font-body text-[14px] text-slate">
         PDF, Word, Excel, CSV, and images — text is extracted and indexed automatically, with OCR for scans.
       </p>
@@ -111,11 +137,9 @@ export default function Documents() {
         }}
         onDragLeave={() => setDragOver(false)}
         onDrop={onDrop}
-        className={`mt-8 flex flex-col items-center justify-center rounded-[4px] border-2 border-dashed px-6 py-12 text-center transition-colors ${
-          dragOver ? 'border-brass bg-brass/[0.06]' : 'border-ink/15 bg-white/40'
-        }`}
+        className={`dropzone mt-8 flex flex-col items-center justify-center px-6 py-12 text-center ${dragOver ? 'drag-over' : ''}`}
       >
-        <p className="font-display text-[16px] font-semibold text-ink">
+        <p className="dropzone-title text-[16px]">
           {uploading ? 'Uploading…' : 'Drag files here, or browse'}
         </p>
         <p className="mt-1 font-body text-[13px] text-slate">Up to 25 MB per file</p>
@@ -147,15 +171,15 @@ export default function Documents() {
       </div>
 
       {/* Table */}
-      <div className="mt-4 overflow-hidden rounded-[4px] border border-ink/[0.08]">
-        <table className="w-full border-collapse bg-white/60 text-left">
+      <div className="docs-table-wrap mt-4">
+        <table className="docs-table">
           <thead>
-            <tr className="border-b border-ink/[0.08] bg-paper-dim/50">
-              <th className="px-4 py-3 font-mono text-[10.5px] uppercase tracking-[0.08em] text-slate">Name</th>
-              <th className="px-4 py-3 font-mono text-[10.5px] uppercase tracking-[0.08em] text-slate">Status</th>
-              <th className="px-4 py-3 font-mono text-[10.5px] uppercase tracking-[0.08em] text-slate">Size</th>
-              <th className="px-4 py-3 font-mono text-[10.5px] uppercase tracking-[0.08em] text-slate">Uploaded</th>
-              <th className="px-4 py-3" />
+            <tr>
+              <th>Name</th>
+              <th>Status</th>
+              <th>Size</th>
+              <th>Uploaded</th>
+              <th />
             </tr>
           </thead>
           <tbody>
@@ -166,8 +190,8 @@ export default function Documents() {
               <tr><td colSpan={5} className="px-4 py-8 text-center font-body text-[13.5px] text-slate">No documents match.</td></tr>
             )}
             {!loading && data?.documents.map((d) => (
-              <tr key={d.id} className="border-b border-ink/[0.06] last:border-0 hover:bg-paper-dim/30">
-                <td className="max-w-[280px] px-4 py-3">
+              <tr key={d.id}>
+                <td className="max-w-[280px]">
                   {renaming === d.id ? (
                     <input
                       autoFocus
@@ -178,21 +202,24 @@ export default function Documents() {
                       onBlur={() => submitRename(d)}
                     />
                   ) : (
-                    <span className="truncate font-body text-[13.5px] text-ink block">{d.file_name}</span>
+                    <span className="flex items-center gap-2.5">
+                      <FileTypeIcon fileName={d.file_name} />
+                      <span className="truncate font-body text-[13.5px] text-ink">{d.file_name}</span>
+                    </span>
                   )}
                 </td>
-                <td className="px-4 py-3">
-                  <span className={`rounded-[2px] px-2 py-0.5 font-mono text-[10.5px] uppercase tracking-[0.06em] ${STATUS_STYLES[d.processing_status] || 'bg-ink/5 text-slate'}`}>
+                <td>
+                  <span className={`status-pill ${d.processing_status}`}>
                     {d.processing_status}
                   </span>
                 </td>
-                <td className="px-4 py-3 font-mono text-[12px] text-slate">{formatSize(d.file_size)}</td>
-                <td className="px-4 py-3 font-mono text-[12px] text-slate">{new Date(d.uploaded_at).toLocaleDateString()}</td>
-                <td className="px-4 py-3">
-                  <div className="flex items-center justify-end gap-3 font-mono text-[11px] uppercase tracking-[0.06em]">
-                    <a href={apiClient.downloadUrl(d.id)} className="text-slate hover:text-ink">Download</a>
-                    <button onClick={() => startRename(d)} className="text-slate hover:text-ink">Rename</button>
-                    <button onClick={() => onDelete(d)} className="text-rust hover:text-rust/70">Delete</button>
+                <td className="font-mono text-[12px] text-slate">{formatSize(d.file_size)}</td>
+                <td className="font-mono text-[12px] text-slate">{new Date(d.uploaded_at).toLocaleDateString()}</td>
+                <td>
+                  <div className="flex items-center justify-end gap-3">
+                    <a href={apiClient.downloadUrl(d.id)} className="docs-row-action">Download</a>
+                    <button onClick={() => startRename(d)} className="docs-row-action">Rename</button>
+                    <button onClick={() => onDelete(d)} className="docs-row-action danger">Delete</button>
                   </div>
                 </td>
               </tr>

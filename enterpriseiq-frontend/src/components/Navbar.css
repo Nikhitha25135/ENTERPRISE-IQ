@@ -1,0 +1,54 @@
+/* ==========================================================================
+   Navbar.css
+   ========================================================================== */
+
+.navbar {
+  background: rgba(246, 248, 249, 0.85);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(22, 35, 43, 0.07);
+  transition: background-color 0.2s var(--ease-out), border-color 0.2s var(--ease-out);
+}
+
+.navbar.on-dark {
+  background: transparent;
+  border-bottom: 1px solid rgba(246, 248, 249, 0.1);
+}
+
+.navbar-link {
+  font-family: var(--font-body);
+  font-size: 13.5px;
+  color: var(--slate-600);
+  transition: color 0.15s var(--ease-out);
+}
+
+.navbar-link:hover { color: var(--slate-900); }
+.navbar-link.active { color: var(--slate-900); }
+
+.navbar.on-dark .navbar-link { color: rgba(246, 248, 249, 0.7); }
+.navbar.on-dark .navbar-link:hover,
+.navbar.on-dark .navbar-link.active { color: var(--paper); }
+
+.navbar.on-dark .navbar-mobile-toggle {
+  border-color: rgba(246, 248, 249, 0.25);
+  color: var(--paper);
+}
+
+.navbar-account {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--slate-600);
+  transition: color 0.15s var(--ease-out);
+}
+.navbar-account:hover { color: var(--slate-900); }
+
+.navbar-mobile-toggle {
+  border: 1px solid rgba(22, 35, 43, 0.15);
+  border-radius: 3px;
+}
+
+.navbar-mobile-panel {
+  border-top: 1px solid rgba(22, 35, 43, 0.07);
+  background: var(--paper);
+}

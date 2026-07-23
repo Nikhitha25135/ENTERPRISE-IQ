@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import Logo from '../components/Logo';
 import { useAuth } from '../context/AuthContext';
 import apiClient from '../lib/api';
+import './Register.css';
 
 export default function Register() {
   const { register } = useAuth();
@@ -37,14 +38,14 @@ export default function Register() {
   };
 
   return (
-    <div className="flex min-h-[calc(100vh-73px)] items-center justify-center bg-paper px-6 py-16">
+    <div className="auth-shell flex items-center justify-center px-6 py-16">
       <div className="w-full max-w-[420px]">
         <div className="mb-8 flex justify-center">
           <Link to="/"><Logo /></Link>
         </div>
-        <div className="card p-8">
-          <p className="eyebrow text-center">Get started</p>
-          <h1 className="mt-2 text-center font-display text-[24px] font-semibold text-ink">Create your account</h1>
+        <div className="auth-card p-8">
+          <p className="auth-kicker">Get started</p>
+          <h1 className="auth-title mt-2 text-[24px]">Create your account</h1>
 
           <form onSubmit={onSubmit} className="mt-7 space-y-4">
             <div>
@@ -99,7 +100,7 @@ export default function Register() {
               />
               <ul className="mt-2 flex flex-wrap gap-x-4 gap-y-1">
                 {passwordHints.map((h) => (
-                  <li key={h.label} className={`font-mono text-[10.5px] ${h.met ? 'text-verified' : 'text-slate-300'}`}>
+                  <li key={h.label} className={`password-hint ${h.met ? 'met' : ''}`}>
                     {h.met ? '✓' : '·'} {h.label}
                   </li>
                 ))}
@@ -107,7 +108,7 @@ export default function Register() {
             </div>
 
             {error && (
-              <p className="rounded-[3px] border border-rust/25 bg-rust/[0.06] px-3 py-2 font-body text-[13px] text-rust">
+              <p className="auth-error px-3 py-2 font-body text-[13px]">
                 {error}
               </p>
             )}
@@ -117,7 +118,7 @@ export default function Register() {
             </button>
           </form>
         </div>
-        <p className="mt-6 text-center font-body text-[13.5px] text-slate">
+        <p className="auth-footer-text mt-6 font-body text-[13.5px]">
           Already have an account?{' '}
           <Link to="/login" className="font-medium text-ink underline underline-offset-2">
             Sign in

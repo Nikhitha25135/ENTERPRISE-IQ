@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import VerificationTrail from '../components/VerificationTrail';
+import './Home.css';
 
 const CATEGORIES = [
   { label: 'Finance', note: 'Spend, budgets, close' },
@@ -63,28 +64,31 @@ export default function Home() {
   return (
     <div>
       {/* HERO */}
-      <section className="relative overflow-hidden bg-paper">
-        <div className="mx-auto grid max-w-7xl gap-14 px-6 pb-20 pt-16 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:px-10 lg:pb-28 lg:pt-24">
+      <section className="home-hero">
+        <div className="relative mx-auto grid max-w-7xl gap-14 px-6 pb-20 pt-16 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:px-10 lg:pb-28 lg:pt-24">
           <div>
-            <p className="eyebrow">Enterprise knowledge, answered</p>
-            <h1 className="mt-4 max-w-xl font-display text-[40px] font-semibold leading-[1.08] tracking-[-0.015em] text-ink sm:text-[52px]">
+            <p className="home-hero-kicker">
+              <span className="home-hero-kicker-dot" />
+              AI-powered document intelligence
+            </p>
+            <h1 className="home-hero-title mt-4 max-w-xl text-[40px] sm:text-[52px]">
               Ask your company's documents.
-              <span className="block text-navy-400">Get an answer you can audit.</span>
+              <span className="home-hero-title-accent">Get an answer you can audit.</span>
             </h1>
-            <p className="mt-6 max-w-md font-body text-[16px] leading-relaxed text-slate">
+            <p className="home-hero-lede mt-6 max-w-md font-body text-[16px]">
               EnterpriseIQ turns your policies, contracts, and spreadsheets into a single
               place to ask a question — and traces every sentence of the answer back to
               the page it came from.
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-4">
-              <Link to="/register" className="btn-primary">
+              <Link to="/register" className="home-hero-btn-primary">
                 Get started free
               </Link>
-              <Link to="/login" className="btn-secondary">
+              <Link to="/login" className="home-hero-btn-secondary">
                 Sign in
               </Link>
             </div>
-            <div className="mt-10 flex items-center gap-6 font-mono text-[11px] uppercase tracking-[0.1em] text-slate-300">
+            <div className="home-hero-trace mt-10 flex items-center gap-6">
               <span>Planner → Retrieval → Response → Verification</span>
             </div>
           </div>
@@ -96,14 +100,14 @@ export default function Home() {
       </section>
 
       {/* CATEGORY BAR */}
-      <section id="platform" className="border-y border-ink/[0.07] bg-navy-900">
+      <section id="platform" className="home-category-bar">
         <div className="mx-auto max-w-7xl px-6 py-10 lg:px-10">
-          <p className="eyebrow mb-6 text-brass-400/80">One assistant, every function</p>
+          <p className="home-category-eyebrow eyebrow mb-6">One assistant, every function</p>
           <div className="grid grid-cols-2 gap-6 sm:grid-cols-5">
             {CATEGORIES.map((c) => (
-              <div key={c.label} className="border-l border-paper/15 pl-4">
-                <p className="font-display text-[17px] font-medium text-paper">{c.label}</p>
-                <p className="mt-1 font-body text-[12.5px] leading-snug text-paper/45">{c.note}</p>
+              <div key={c.label} className="home-category-item">
+                <p className="home-category-label text-[17px]">{c.label}</p>
+                <p className="home-category-note mt-1 font-body text-[12.5px] leading-snug">{c.note}</p>
               </div>
             ))}
           </div>
@@ -125,13 +129,13 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="mt-14 grid gap-px overflow-hidden rounded-[4px] border border-ink/[0.08] bg-ink/[0.08] md:grid-cols-4">
+          <div className="home-pipeline-grid mt-14 grid gap-px overflow-hidden rounded-[4px] md:grid-cols-4">
             {PIPELINE.map((p, i) => (
-              <div key={p.stage} className="flex flex-col bg-paper p-7">
-                <span className="font-mono text-[11px] text-brass-600">
+              <div key={p.stage} className="home-pipeline-card flex flex-col p-7">
+                <span className="home-pipeline-index">
                   {String(i + 1).padStart(2, '0')}
                 </span>
-                <p className="mt-3 font-mono text-[12px] uppercase tracking-[0.1em] text-slate">{p.stage}</p>
+                <p className="home-pipeline-stage mt-3">{p.stage}</p>
                 <h3 className="mt-3 font-display text-[17px] font-semibold leading-snug text-ink">{p.title}</h3>
                 <p className="mt-2.5 font-body text-[13.5px] leading-relaxed text-slate">{p.body}</p>
               </div>
@@ -152,8 +156,14 @@ export default function Home() {
 
           <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {FEATURES.map((f) => (
-              <div key={f.title} className="card p-6">
-                <h3 className="font-display text-[16.5px] font-semibold text-ink">{f.title}</h3>
+              <div key={f.title} className="home-feature-card p-6">
+                <div className="home-feature-icon" aria-hidden="true">
+                  <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="2.5" y="2.5" width="15" height="15" rx="4" stroke="currentColor" strokeWidth="1.4" />
+                    <path d="M6.5 10h7M6.5 6.8h7M6.5 13.2h4" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
+                  </svg>
+                </div>
+                <h3 className="mt-4 font-display text-[16.5px] font-semibold text-ink">{f.title}</h3>
                 <p className="mt-2.5 font-body text-[13.5px] leading-relaxed text-slate">{f.body}</p>
               </div>
             ))}
@@ -162,10 +172,10 @@ export default function Home() {
       </section>
 
       {/* SECURITY */}
-      <section id="security" className="bg-navy-900 py-20 text-paper lg:py-28">
+      <section id="security" className="home-security py-20 lg:py-28">
         <div className="mx-auto grid max-w-7xl gap-12 px-6 lg:grid-cols-[0.9fr_1.1fr] lg:items-center lg:px-10">
           <div>
-            <p className="eyebrow text-brass-400/80">Security &amp; access</p>
+            <p className="home-category-eyebrow eyebrow">Security &amp; access</p>
             <h2 className="mt-4 font-display text-[32px] font-semibold leading-tight text-paper sm:text-[38px]">
               Access control isn't an afterthought here
             </h2>
@@ -181,8 +191,8 @@ export default function Home() {
               { role: 'Manager', desc: 'Sees the org roster and its document activity.' },
               { role: 'Employee', desc: 'Full use of chat and their own workspaces.' },
             ].map((r) => (
-              <div key={r.role} className="rounded-[3px] border border-paper/15 p-5">
-                <p className="font-mono text-[11px] uppercase tracking-[0.1em] text-brass-400">{r.role}</p>
+              <div key={r.role} className="home-security-role p-5">
+                <p className="home-security-role-label">{r.role}</p>
                 <p className="mt-2 font-body text-[13px] leading-relaxed text-paper/70">{r.desc}</p>
               </div>
             ))}
@@ -191,9 +201,9 @@ export default function Home() {
       </section>
 
       {/* CTA */}
-      <section className="bg-paper py-24">
+      <section className="home-cta py-24">
         <div className="mx-auto max-w-3xl px-6 text-center lg:px-10">
-          <h2 className="font-display text-[34px] font-semibold leading-tight text-ink sm:text-[42px]">
+          <h2 className="home-cta-title text-[34px] leading-tight sm:text-[42px]">
             Put your documents to work.
           </h2>
           <p className="mx-auto mt-4 max-w-md font-body text-[15px] leading-relaxed text-slate">

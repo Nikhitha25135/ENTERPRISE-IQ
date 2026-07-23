@@ -1,3 +1,5 @@
+@import './styles/tokens.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -15,11 +17,11 @@
     letter-spacing: -0.01em;
   }
   ::selection {
-    background: #A9803F;
-    color: #EFEEE7;
+    background: var(--teal-400);
+    color: var(--paper);
   }
   :focus-visible {
-    outline: 2px solid #A9803F;
+    outline: 2px solid var(--teal-400);
     outline-offset: 2px;
   }
   @media (prefers-reduced-motion: reduce) {
@@ -55,3 +57,17 @@
     @apply rounded-[4px] border border-ink/[0.08] bg-white/70 shadow-card;
   }
 }
+
+/* Shared status pill — used on Dashboard and Documents; keep here so both stay in sync. */
+.status-pill {
+  border-radius: 2px;
+  padding: 2px 8px;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.status-pill.searchable { background: var(--mint-100); color: var(--color-success); }
+.status-pill.processing { background: var(--amber-100); color: var(--amber-600); }
+.status-pill.uploaded   { background: rgba(22, 35, 43, 0.06); color: var(--slate-600); }
+.status-pill.failed     { background: var(--color-error-bg); color: var(--color-error); }

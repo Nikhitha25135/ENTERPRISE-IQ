@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import Logo from '../components/Logo';
 import apiClient from '../lib/api';
+import './ResetPassword.css';
 
 export default function ResetPassword() {
   const [params] = useSearchParams();
@@ -28,25 +29,25 @@ export default function ResetPassword() {
   };
 
   return (
-    <div className="flex min-h-[calc(100vh-73px)] items-center justify-center bg-paper px-6 py-16">
+    <div className="auth-shell flex items-center justify-center px-6 py-16">
       <div className="w-full max-w-[400px]">
         <div className="mb-8 flex justify-center">
           <Link to="/"><Logo /></Link>
         </div>
-        <div className="card p-8">
+        <div className="auth-card p-8">
           {done ? (
             <div className="text-center">
-              <div className="mx-auto flex h-11 w-11 items-center justify-center rounded-full bg-verified-100 text-verified">✓</div>
+              <div className="auth-success-badge mx-auto flex h-11 w-11 items-center justify-center rounded-full">✓</div>
               <h1 className="mt-4 font-display text-[21px] font-semibold text-ink">Password updated</h1>
               <p className="mt-2 font-body text-[13.5px] text-slate">Taking you to sign in…</p>
             </div>
           ) : (
             <>
-              <p className="eyebrow text-center">Reset password</p>
-              <h1 className="mt-2 text-center font-display text-[22px] font-semibold text-ink">Choose a new password</h1>
+              <p className="auth-kicker">Reset password</p>
+              <h1 className="auth-title mt-2 text-[22px]">Choose a new password</h1>
 
               {!token && (
-                <p className="mt-4 rounded-[3px] border border-brass/25 bg-brass/[0.06] px-3 py-2 text-center font-body text-[13px] text-brass-600">
+                <p className="auth-warning mt-4 px-3 py-2 font-body text-[13px]">
                   This link is missing its reset token — open it directly from the email.
                 </p>
               )}
@@ -68,7 +69,7 @@ export default function ResetPassword() {
                 </div>
 
                 {error && (
-                  <p className="rounded-[3px] border border-rust/25 bg-rust/[0.06] px-3 py-2 font-body text-[13px] text-rust">
+                  <p className="auth-error px-3 py-2 font-body text-[13px]">
                     {error}
                   </p>
                 )}

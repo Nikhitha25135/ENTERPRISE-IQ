@@ -1,0 +1,103 @@
+/* ==========================================================================
+   Documents.css — library screen: upload dropzone + document table.
+   ========================================================================== */
+
+.docs-title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  color: var(--slate-900);
+}
+
+.dropzone {
+  border: 2px dashed var(--slate-100);
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: var(--radius-md);
+  transition: border-color 0.18s var(--ease-out), background-color 0.18s var(--ease-out);
+}
+
+.dropzone.drag-over {
+  border-color: var(--teal-400);
+  background: rgba(43, 182, 115, 0.06);
+}
+
+.dropzone-title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  color: var(--slate-900);
+}
+
+.docs-table-wrap {
+  border: 1px solid var(--slate-100);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+/* ---- Document type icon ---- */
+.file-type-icon {
+  display: inline-flex;
+  height: 28px;
+  width: 28px;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+}
+.file-type-icon svg { height: 15px; width: 15px; }
+
+.file-type-icon.pdf     { background: var(--color-error-bg); color: var(--color-error); }
+.file-type-icon.word    { background: rgba(30, 111, 191, 0.12); color: #2266A8; }
+.file-type-icon.excel   { background: var(--mint-100); color: var(--color-success); }
+.file-type-icon.slides  { background: var(--amber-100); color: var(--amber-600); }
+.file-type-icon.image   { background: rgba(147, 90, 201, 0.12); color: #7A4FB5; }
+.file-type-icon.text    { background: rgba(22, 35, 43, 0.06); color: var(--slate-600); }
+.file-type-icon.default { background: rgba(22, 35, 43, 0.06); color: var(--slate-600); }
+
+.docs-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: rgba(255, 255, 255, 0.6);
+  text-align: left;
+}
+
+.docs-table thead tr {
+  border-bottom: 1px solid var(--slate-100);
+  background: rgba(236, 241, 241, 0.5);
+}
+
+.docs-table th {
+  padding: 12px 16px;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--slate-600);
+}
+
+.docs-table td {
+  padding: 12px 16px;
+}
+
+.docs-table tbody tr {
+  border-bottom: 1px solid rgba(22, 35, 43, 0.06);
+  transition: background-color 0.15s var(--ease-out);
+}
+
+.docs-table tbody tr:last-child { border-bottom: none; }
+
+.docs-table tbody tr:hover {
+  background: rgba(236, 241, 241, 0.35);
+}
+
+.docs-row-action {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--slate-600);
+  transition: color 0.15s var(--ease-out);
+}
+
+.docs-row-action:hover { color: var(--slate-900); }
+
+.docs-row-action.danger { color: var(--color-error); }
+.docs-row-action.danger:hover { color: #98352A; }

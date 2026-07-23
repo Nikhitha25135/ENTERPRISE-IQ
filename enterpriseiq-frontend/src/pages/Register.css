@@ -1,0 +1,55 @@
+/* ==========================================================================
+   Register.css — sign-up screen only.
+   ========================================================================== */
+
+.auth-shell {
+  background: var(--paper);
+  min-height: calc(100vh - 73px);
+}
+
+.auth-card {
+  background: var(--surface);
+  border: 1px solid var(--slate-100);
+  border-radius: var(--radius-md);
+  box-shadow: 0 1px 2px rgba(15, 61, 62, 0.04), 0 8px 24px -12px rgba(15, 61, 62, 0.18);
+}
+
+.auth-kicker {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--teal-500);
+  text-align: center;
+}
+
+.auth-title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  color: var(--slate-900);
+  text-align: center;
+}
+
+.auth-error {
+  border: 1px solid rgba(193, 72, 58, 0.25);
+  background: var(--color-error-bg);
+  color: var(--color-error);
+  border-radius: var(--radius-sm);
+}
+
+.auth-footer-text {
+  color: var(--slate-600);
+  text-align: center;
+}
+
+/* Password strength hints */
+.password-hint {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  color: var(--slate-300);
+  transition: color 0.15s var(--ease-out);
+}
+
+.password-hint.met {
+  color: var(--color-success);
+}

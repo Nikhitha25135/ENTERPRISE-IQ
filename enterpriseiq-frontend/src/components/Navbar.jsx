@@ -1,7 +1,8 @@
-import { Link, NavLink, useNavigate } from 'react-router-dom';
+import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import Logo from './Logo';
 import { useAuth } from '../context/AuthContext';
+import './Navbar.css';
 
 const publicLinks = [
   { to: '/#platform', label: 'Platform' },
@@ -12,7 +13,9 @@ const publicLinks = [
 export default function Navbar() {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
   const [open, setOpen] = useState(false);
+  const onDark = !user && location.pathname === '/';
 
   const handleLogout = async () => {
     await logout();
@@ -20,32 +23,32 @@ export default function Navbar() {
   };
 
   return (
-    <header className="sticky top-0 z-50 border-b border-ink/[0.07] bg-paper/85 backdrop-blur">
+    <header className={`navbar sticky top-0 z-50 ${onDark ? 'on-dark' : ''}`}>
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-10">
         <Link to="/" onClick={() => setOpen(false)}>
-          <Logo />
+          <Logo tone={onDark ? 'light' : 'dark'} />
         </Link>
 
         <nav className="hidden items-center gap-8 md:flex">
           {!user &&
             publicLinks.map((l) => (
-              <a key={l.to} href={l.to} className="font-body text-[13.5px] text-slate transition-colors hover:text-ink">
+              <a key={l.to} href={l.to} className="navbar-link">
                 {l.label}
               </a>
             ))}
           {user && (
             <>
-              <NavLink to="/dashboard" className={({ isActive }) => `font-body text-[13.5px] transition-colors ${isActive ? 'text-ink' : 'text-slate hover:text-ink'}`}>
+              <NavLink to="/dashboard" className={({ isActive }) => `navbar-link ${isActive ? 'active' : ''}`}>
                 Dashboard
               </NavLink>
-              <NavLink to="/documents" className={({ isActive }) => `font-body text-[13.5px] transition-colors ${isActive ? 'text-ink' : 'text-slate hover:text-ink'}`}>
+              <NavLink to="/documents" className={({ isActive }) => `navbar-link ${isActive ? 'active' : ''}`}>
                 Documents
               </NavLink>
-              <NavLink to="/chat" className={({ isActive }) => `font-body text-[13.5px] transition-colors ${isActive ? 'text-ink' : 'text-slate hover:text-ink'}`}>
+              <NavLink to="/chat" className={({ isActive }) => `navbar-link ${isActive ? 'active' : ''}`}>
                 Ask
               </NavLink>
               {(user.role === 'admin' || user.role === 'manager') && (
-                <NavLink to="/users" className={({ isActive }) => `font-body text-[13.5px] transition-colors ${isActive ? 'text-ink' : 'text-slate hover:text-ink'}`}>
+                <NavLink to="/users" className={({ isActive }) => `navbar-link ${isActive ? 'active' : ''}`}>
                   People
                 </NavLink>
               )}
@@ -56,7 +59,7 @@ export default function Navbar() {
         <div className="hidden items-center gap-3 md:flex">
           {user ? (
             <>
-              <Link to="/profile" className="font-mono text-[12px] uppercase tracking-[0.08em] text-slate hover:text-ink">
+              <Link to="/profile" className="navbar-account">
                 {user.full_name?.split(' ')[0] || 'Account'}
               </Link>
               <button onClick={handleLogout} className="btn-secondary !py-2">
@@ -65,10 +68,10 @@ export default function Navbar() {
             </>
           ) : (
             <>
-              <Link to="/login" className="font-body text-[13.5px] text-slate hover:text-ink">
+              <Link to="/login" className="navbar-link">
                 Sign in
               </Link>
-              <Link to="/register" className="btn-primary !py-2">
+              <Link to="/register" className={onDark ? 'home-hero-btn-primary !py-2' : 'btn-primary !py-2'}>
                 Get started
               </Link>
             </>
@@ -76,7 +79,7 @@ export default function Navbar() {
         </div>
 
         <button
-          className="flex h-9 w-9 items-center justify-center rounded-[3px] border border-ink/15 md:hidden"
+          className="navbar-mobile-toggle flex h-9 w-9 items-center justify-center md:hidden"
           onClick={() => setOpen((o) => !o)}
           aria-label="Toggle menu"
         >
@@ -85,7 +88,7 @@ export default function Navbar() {
       </div>
 
       {open && (
-        <div className="border-t border-ink/[0.07] bg-paper px-6 py-4 md:hidden">
+        <div className="navbar-mobile-panel px-6 py-4 md:hidden">
           <div className="flex flex-col gap-3">
             {!user &&
               publicLinks.map((l) => (

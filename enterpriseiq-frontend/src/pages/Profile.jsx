@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { useToast } from '../context/ToastContext';
 import apiClient from '../lib/api';
+import './Profile.css';
 
 export default function Profile() {
   const { user, setUser } = useAuth();
@@ -26,18 +27,18 @@ export default function Profile() {
   return (
     <div className="mx-auto max-w-2xl px-6 py-12 lg:px-10">
       <p className="eyebrow">Account</p>
-      <h1 className="mt-2 font-display text-[28px] font-semibold text-ink">Your profile</h1>
+      <h1 className="profile-title mt-2 text-[28px]">Your profile</h1>
 
-      <div className="mt-8 card p-7">
+      <div className="profile-card mt-8 p-7">
         <div className="flex items-center gap-4 border-b border-ink/[0.07] pb-6">
-          <div className="flex h-14 w-14 items-center justify-center rounded-full bg-navy font-display text-[20px] font-semibold text-paper">
+          <div className="profile-avatar flex h-14 w-14 items-center justify-center rounded-full text-[20px]">
             {user?.full_name?.[0]?.toUpperCase() || '?'}
           </div>
           <div>
             <p className="font-display text-[17px] font-semibold text-ink">{user?.full_name}</p>
             <p className="font-body text-[13px] text-slate">{user?.email}</p>
           </div>
-          <span className="ml-auto rounded-[2px] bg-brass/[0.12] px-2.5 py-1 font-mono text-[10.5px] uppercase tracking-[0.08em] text-brass-600">
+          <span className="profile-role-badge ml-auto px-2.5 py-1">
             {user?.role}
           </span>
         </div>
@@ -72,7 +73,7 @@ export default function Profile() {
         </form>
       </div>
 
-      <div className="mt-6 card p-7">
+      <div className="profile-card mt-6 p-7">
         <p className="font-display text-[15px] font-semibold text-ink">Member since</p>
         <p className="mt-1 font-mono text-[12.5px] text-slate">
           {user?.created_at ? new Date(user.created_at).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' }) : '—'}

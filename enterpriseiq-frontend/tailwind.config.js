@@ -4,45 +4,48 @@ export default {
   theme: {
     extend: {
       colors: {
-        ink: '#151A2C',
-        navy: {
-          DEFAULT: '#1D2540',
-          50: '#EEF0F6',
-          100: '#D6DAE9',
-          200: '#AEB6CE',
-          400: '#5C6690',
-          600: '#2A3358',
-          700: '#1D2540',
-          800: '#161B31',
-          900: '#0F1322',
+        // ---- Deep teal + slate system (see src/styles/tokens.css for the source of truth) ----
+        ink: '#16232B',          // primary text (was near-black navy)
+        navy: {                   // dark surfaces / primary buttons — now "deep teal"
+          DEFAULT: '#0F3D3E',
+          50: '#E9F5F2',
+          100: '#CFE9E3',
+          200: '#9FD3C7',
+          400: '#1E8F63',
+          600: '#125550',
+          700: '#0F3D3E',
+          800: '#0B2E2F',
+          900: '#082625',
         },
-        paper: '#EFEEE7',
-        'paper-dim': '#E4E2D7',
+        paper: '#F6F8F9',          // page background — pale slate-white
+        'paper-dim': '#ECF1F1',
         slate: {
-          DEFAULT: '#5B6472',
-          300: '#9AA1AE',
+          DEFAULT: '#52667A',
+          300: '#93A3B1',
         },
-        brass: {
-          DEFAULT: '#A9803F',
-          400: '#C39C5C',
-          600: '#8A672F',
+        brass: {                    // secondary accent — warm amber, kept distinct from the
+                                     // verified-green so status pills stay legible next to each other
+          DEFAULT: '#C99A3E',
+          400: '#DCB667',
+          600: '#A87C2C',
         },
         verified: {
-          DEFAULT: '#3F6B52',
-          100: '#DEE8DF',
-          600: '#2E5140',
+          DEFAULT: '#1E8F63',
+          100: '#DCF5EA',
+          600: '#146B52',
         },
-        rust: '#A6462F',
-        line: '#D8D5C7',
+        rust: '#C1483A',
+        line: '#DCE6E4',
       },
       fontFamily: {
-        display: ['"Fraunces"', 'ui-serif', 'Georgia', 'serif'],
+        display: ['"Space Grotesk"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
         body: ['"Inter"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-        mono: ['"IBM Plex Mono"', 'ui-monospace', 'SFMono-Regular', 'monospace'],
+        mono: ['"JetBrains Mono"', 'ui-monospace', 'SFMono-Regular', 'monospace'],
       },
       boxShadow: {
-        card: '0 1px 2px rgba(21, 26, 44, 0.04), 0 8px 24px -12px rgba(21, 26, 44, 0.18)',
-        seal: '0 6px 20px -6px rgba(169, 128, 63, 0.45)',
+        card: '0 1px 2px rgba(15, 61, 62, 0.05), 0 8px 24px -12px rgba(15, 61, 62, 0.18)',
+        seal: '0 6px 20px -6px rgba(43, 182, 115, 0.45)',
+        glow: '0 0 0 1px rgba(43, 182, 115, 0.25), 0 8px 30px -8px rgba(43, 182, 115, 0.35)',
       },
       keyframes: {
         stamp: {

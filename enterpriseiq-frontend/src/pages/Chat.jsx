@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import apiClient from '../lib/api';
 import { useToast } from '../context/ToastContext';
+import './Chat.css';
 
 export default function Chat() {
   const { push } = useToast();
@@ -45,11 +46,11 @@ export default function Chat() {
       {/* Chat column */}
       <div className="flex min-h-[70vh] flex-col">
         <p className="eyebrow">Ask</p>
-        <h1 className="mt-2 font-display text-[26px] font-semibold text-ink">Ask your document library</h1>
+        <h1 className="chat-title mt-2 text-[26px]">Ask your document library</h1>
 
         <div className="mt-6 flex-1 space-y-5 overflow-y-auto pb-4">
           {thread.length === 0 && (
-            <div className="card flex flex-col items-start gap-2 p-6">
+            <div className="chat-suggestions flex flex-col items-start gap-2 p-6">
               <p className="font-display text-[15px] font-semibold text-ink">Try asking something like:</p>
               <ul className="mt-1 space-y-1.5 font-body text-[13.5px] text-slate">
                 <li>"Summarize the vendor renewal policy."</li>
@@ -62,23 +63,19 @@ export default function Chat() {
           {thread.map((m, i) =>
             m.role === 'user' ? (
               <div key={i} className="flex justify-end">
-                <div className="max-w-[75%] rounded-[4px] bg-navy px-4 py-3 font-body text-[14px] text-paper">
+                <div className="chat-bubble-user max-w-[75%] px-4 py-3 font-body text-[14px]">
                   {m.text}
                 </div>
               </div>
             ) : (
               <div key={i} className="flex justify-start">
-                <div className="max-w-[85%] card p-5">
+                <div className="chat-bubble-assistant max-w-[85%] p-5">
                   {m.error ? (
                     <p className="font-body text-[13.5px] text-rust">{m.error}</p>
                   ) : (
                     <>
                       <div className="flex items-center gap-2">
-                        <span
-                          className={`rounded-[2px] px-2 py-0.5 font-mono text-[10.5px] uppercase tracking-[0.06em] ${
-                            m.verified ? 'bg-verified-100 text-verified' : 'bg-brass/[0.12] text-brass-600'
-                          }`}
-                        >
+                        <span className={`chat-badge ${m.verified ? 'verified' : 'unverified'}`}>
                           {m.verified ? 'Verified' : 'Unverified'}
                         </span>
                         <span className="font-mono text-[10.5px] uppercase tracking-[0.06em] text-slate-300">{m.intent}</span>
@@ -91,8 +88,8 @@ export default function Chat() {
                         <div className="mt-4 space-y-2 border-t border-ink/[0.07] pt-3">
                           <p className="font-mono text-[10.5px] uppercase tracking-[0.1em] text-slate-300">Sources</p>
                           {m.citations.map((c) => (
-                            <div key={c.chunk_id} className="rounded-[3px] border border-ink/[0.08] bg-paper/60 px-3 py-2">
-                              <p className="font-mono text-[11px] text-brass-600">
+                            <div key={c.chunk_id} className="chat-citation px-3 py-2">
+                              <p className="chat-citation-source">
                                 {c.file_name}{c.page != null ? ` · p.${c.page}` : ''}
                               </p>
                               <p className="mt-1 font-body text-[12.5px] leading-snug text-slate">{c.text_preview}</p>
@@ -109,8 +106,8 @@ export default function Chat() {
 
           {asking && (
             <div className="flex justify-start">
-              <div className="card flex items-center gap-2 px-4 py-3">
-                <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-brass" />
+              <div className="chat-bubble-assistant flex items-center gap-2 px-4 py-3">
+                <span className="chat-typing-dot h-1.5 w-1.5 animate-pulse rounded-full" />
                 <span className="font-mono text-[11px] uppercase tracking-[0.08em] text-slate">Planner → Retrieval → Verification…</span>
               </div>
             </div>
@@ -118,7 +115,7 @@ export default function Chat() {
           <div ref={bottomRef} />
         </div>
 
-        <form onSubmit={submit} className="sticky bottom-0 mt-4 flex gap-3 border-t border-ink/[0.08] bg-paper pt-4">
+        <form onSubmit={submit} className="chat-input-bar sticky bottom-0 mt-4 flex gap-3 pt-4">
           <input
             className="field-input flex-1"
             placeholder="Ask a question about your documents…"
@@ -142,7 +139,7 @@ export default function Chat() {
             <button
               key={h.id}
               onClick={() => setQuery(h.query)}
-              className="block w-full rounded-[3px] border border-ink/[0.08] bg-white/50 px-3 py-2.5 text-left transition-colors hover:border-brass/40"
+              className="chat-history-item block w-full px-3 py-2.5 text-left"
             >
               <p className="truncate font-body text-[12.5px] text-ink">{h.query}</p>
               <p className={`mt-1 font-mono text-[10px] uppercase tracking-[0.06em] ${h.verified ? 'text-verified' : 'text-brass-600'}`}>

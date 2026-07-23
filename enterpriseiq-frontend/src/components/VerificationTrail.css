@@ -1,0 +1,95 @@
+/* ==========================================================================
+   VerificationTrail.css — the animated hero widget on the landing page.
+   ========================================================================== */
+
+.trail-card {
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid var(--slate-100);
+  border-radius: var(--radius-md);
+  box-shadow: 0 1px 2px rgba(15, 61, 62, 0.04), 0 8px 24px -12px rgba(15, 61, 62, 0.18);
+  overflow: hidden;
+  position: relative;
+}
+
+.trail-header {
+  border-bottom: 1px solid rgba(22, 35, 43, 0.07);
+}
+
+.trail-live-dot {
+  background: var(--teal-400);
+}
+
+.trail-query-box {
+  border: 1px solid rgba(22, 35, 43, 0.1);
+  background: rgba(246, 248, 249, 0.6);
+  border-radius: 3px;
+}
+
+.trail-query-text {
+  font-family: var(--font-mono);
+  color: var(--teal-700);
+}
+
+.trail-cursor {
+  color: var(--teal-400);
+}
+
+.trail-steps {
+  border-left: 1px dashed rgba(22, 35, 43, 0.15);
+}
+
+.trail-step-dot {
+  background: rgba(22, 35, 43, 0.15);
+  transition: background-color 0.2s var(--ease-out);
+}
+.trail-step-dot.active { background: var(--teal-400); }
+.trail-step-dot.done { background: var(--color-success); }
+
+.trail-step-label {
+  color: var(--slate-300);
+  transition: color 0.2s var(--ease-out);
+}
+.trail-step-label.lit { color: var(--slate-900); }
+
+.trail-source-chip {
+  border: 1px solid rgba(201, 154, 62, 0.3);
+  background: var(--amber-100);
+  color: var(--amber-600);
+  border-radius: 2px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+}
+
+.trail-result {
+  background: var(--teal-950);
+  border: 1px solid rgba(22, 35, 43, 0.1);
+  border-radius: 3px;
+}
+
+.trail-result-label {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(246, 248, 249, 0.4);
+}
+
+.trail-result-text {
+  color: rgba(246, 248, 249, 0.85);
+}
+
+.trail-stamp {
+  border: 2px solid var(--teal-400);
+  background: rgba(43, 182, 115, 0.1);
+  box-shadow: 0 6px 20px -6px rgba(43, 182, 115, 0.45);
+}
+
+.trail-stamp-label {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--teal-300);
+  text-align: center;
+}

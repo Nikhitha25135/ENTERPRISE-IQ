@@ -1,0 +1,73 @@
+/* ==========================================================================
+   Chat.css — ask screen: message bubbles, citation cards, history sidebar.
+   ========================================================================== */
+
+.chat-title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  color: var(--slate-900);
+}
+
+.chat-suggestions {
+  background: var(--surface);
+  border: 1px solid var(--slate-100);
+  border-radius: var(--radius-md);
+  box-shadow: 0 1px 2px rgba(15, 61, 62, 0.04);
+}
+
+.chat-bubble-user {
+  background: var(--teal-700);
+  color: var(--paper);
+  border-radius: var(--radius-md);
+}
+
+.chat-bubble-assistant {
+  background: var(--surface);
+  border: 1px solid var(--slate-100);
+  border-radius: var(--radius-md);
+  box-shadow: 0 1px 2px rgba(15, 61, 62, 0.04);
+}
+
+.chat-badge {
+  border-radius: 2px;
+  padding: 2px 8px;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.chat-badge.verified { background: var(--mint-100); color: var(--color-success); }
+.chat-badge.unverified { background: var(--amber-100); color: var(--amber-600); }
+
+.chat-citation {
+  border: 1px solid var(--slate-100);
+  background: rgba(246, 248, 249, 0.6);
+  border-radius: 3px;
+}
+
+.chat-citation-source {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--amber-600);
+}
+
+.chat-typing-dot {
+  background: var(--teal-400);
+}
+
+.chat-input-bar {
+  border-top: 1px solid rgba(22, 35, 43, 0.08);
+  background: var(--paper);
+}
+
+.chat-history-item {
+  border: 1px solid var(--slate-100);
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 3px;
+  transition: border-color 0.15s var(--ease-out);
+}
+
+.chat-history-item:hover {
+  border-color: rgba(43, 182, 115, 0.4);
+}

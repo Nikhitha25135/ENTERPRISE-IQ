@@ -1,0 +1,90 @@
+/* ==========================================================================
+   Users.css — organization / people admin screen.
+   ========================================================================== */
+
+.users-title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  color: var(--slate-900);
+}
+
+.users-error {
+  border: 1px solid rgba(193, 72, 58, 0.25);
+  background: var(--color-error-bg);
+  color: var(--color-error);
+  border-radius: var(--radius-sm);
+}
+
+.users-table-wrap {
+  border: 1px solid var(--slate-100);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.users-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: rgba(255, 255, 255, 0.6);
+  text-align: left;
+}
+
+.users-table thead tr {
+  border-bottom: 1px solid var(--slate-100);
+  background: rgba(236, 241, 241, 0.5);
+}
+
+.users-table th {
+  padding: 12px 16px;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--slate-600);
+}
+
+.users-table td {
+  padding: 12px 16px;
+}
+
+.users-table tbody tr {
+  border-bottom: 1px solid rgba(22, 35, 43, 0.06);
+  transition: background-color 0.15s var(--ease-out);
+}
+.users-table tbody tr:last-child { border-bottom: none; }
+.users-table tbody tr:hover { background: rgba(236, 241, 241, 0.35); }
+
+.users-active-pill {
+  border-radius: 2px;
+  padding: 2px 8px;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.users-active-pill.active { background: var(--mint-100); color: var(--color-success); }
+.users-active-pill.inactive { background: var(--color-error-bg); color: var(--color-error); }
+
+.users-role-select {
+  border: 1px solid rgba(22, 35, 43, 0.15);
+  background: var(--surface);
+  border-radius: 3px;
+  padding: 4px 8px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--slate-900);
+  outline: none;
+}
+.users-role-select:focus { border-color: var(--teal-400); }
+
+.users-role-static {
+  background: rgba(22, 35, 43, 0.06);
+  border-radius: 2px;
+  padding: 2px 8px;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--slate-600);
+}

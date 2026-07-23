@@ -1,0 +1,38 @@
+/* ==========================================================================
+   Footer.css
+   ========================================================================== */
+
+.site-footer {
+  background: var(--teal-950);
+  color: rgba(246, 248, 249, 0.7);
+  border-top: 1px solid rgba(246, 248, 249, 0.1);
+}
+
+.footer-tagline {
+  color: rgba(246, 248, 249, 0.5);
+}
+
+.footer-heading {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(220, 182, 103, 0.8); /* amber-400, dimmed */
+}
+
+.footer-link {
+  color: rgba(246, 248, 249, 0.6);
+  transition: color 0.15s var(--ease-out);
+}
+.footer-link:hover { color: var(--paper); }
+
+.footer-meta {
+  color: rgba(246, 248, 249, 0.4);
+}
+
+.footer-bottom {
+  border-top: 1px solid rgba(246, 248, 249, 0.1);
+  color: rgba(246, 248, 249, 0.35);
+  font-family: var(--font-mono);
+  font-size: 11px;
+}

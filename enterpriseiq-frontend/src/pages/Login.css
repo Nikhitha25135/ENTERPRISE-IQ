@@ -1,0 +1,70 @@
+/* ==========================================================================
+   Login.css — sign-in screen only. Safe to restyle independently of
+   Register.css / ForgotPassword.css even though they share a layout.
+   ========================================================================== */
+
+.auth-shell {
+  background: var(--paper);
+  min-height: calc(100vh - 73px);
+}
+
+.auth-brand-panel {
+  background:
+    radial-gradient(700px 420px at 90% 0%, rgba(43, 182, 115, 0.18) 0%, rgba(43, 182, 115, 0) 60%),
+    linear-gradient(165deg, var(--teal-950) 0%, #0A2E2C 60%, var(--teal-800) 100%);
+}
+
+.auth-brand-title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--paper);
+}
+
+.auth-brand-check {
+  display: inline-flex;
+  height: 18px;
+  width: 18px;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(43, 182, 115, 0.18);
+  color: var(--teal-300);
+  font-size: 10px;
+}
+
+.auth-kicker {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--teal-300);
+}
+
+.auth-title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  color: var(--slate-900);
+}
+
+.auth-error {
+  border: 1px solid rgba(193, 72, 58, 0.25);
+  background: var(--color-error-bg);
+  color: var(--color-error);
+  border-radius: var(--radius-sm);
+}
+
+.auth-link {
+  color: var(--teal-500);
+  transition: color 0.15s var(--ease-out);
+}
+
+.auth-link:hover {
+  color: var(--teal-600);
+}
+
+.auth-footer-text {
+  color: var(--slate-600);
+  text-align: center;
+}

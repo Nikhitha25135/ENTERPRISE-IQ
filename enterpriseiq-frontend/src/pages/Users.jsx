@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { useToast } from '../context/ToastContext';
 import apiClient from '../lib/api';
+import './Users.css';
 
 const ROLES = ['employee', 'manager', 'admin'];
 
@@ -33,23 +34,23 @@ export default function Users() {
   return (
     <div className="mx-auto max-w-5xl px-6 py-12 lg:px-10">
       <p className="eyebrow">Organization</p>
-      <h1 className="mt-2 font-display text-[28px] font-semibold text-ink">People</h1>
+      <h1 className="users-title mt-2 text-[28px]">People</h1>
       <p className="mt-2 font-body text-[14px] text-slate">
         {me?.role === 'admin' ? 'Manage roles across your organization.' : 'View everyone in your organization.'}
       </p>
 
       {error && (
-        <p className="mt-6 rounded-[3px] border border-rust/25 bg-rust/[0.06] px-4 py-3 font-body text-[13.5px] text-rust">{error}</p>
+        <p className="users-error mt-6 px-4 py-3 font-body text-[13.5px]">{error}</p>
       )}
 
-      <div className="mt-8 overflow-hidden rounded-[4px] border border-ink/[0.08]">
-        <table className="w-full border-collapse bg-white/60 text-left">
+      <div className="users-table-wrap mt-8">
+        <table className="users-table">
           <thead>
-            <tr className="border-b border-ink/[0.08] bg-paper-dim/50">
-              <th className="px-4 py-3 font-mono text-[10.5px] uppercase tracking-[0.08em] text-slate">Name</th>
-              <th className="px-4 py-3 font-mono text-[10.5px] uppercase tracking-[0.08em] text-slate">Email</th>
-              <th className="px-4 py-3 font-mono text-[10.5px] uppercase tracking-[0.08em] text-slate">Status</th>
-              <th className="px-4 py-3 font-mono text-[10.5px] uppercase tracking-[0.08em] text-slate">Role</th>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Status</th>
+              <th>Role</th>
             </tr>
           </thead>
           <tbody>
@@ -57,27 +58,27 @@ export default function Users() {
               <tr><td colSpan={4} className="px-4 py-8 text-center font-body text-[13.5px] text-slate">Loading…</td></tr>
             )}
             {users?.map((u) => (
-              <tr key={u.id} className="border-b border-ink/[0.06] last:border-0 hover:bg-paper-dim/30">
-                <td className="px-4 py-3 font-body text-[13.5px] text-ink">{u.full_name}</td>
-                <td className="px-4 py-3 font-body text-[13px] text-slate">{u.email}</td>
-                <td className="px-4 py-3">
-                  <span className={`rounded-[2px] px-2 py-0.5 font-mono text-[10.5px] uppercase tracking-[0.06em] ${u.is_active ? 'bg-verified-100 text-verified' : 'bg-rust/[0.08] text-rust'}`}>
+              <tr key={u.id}>
+                <td className="font-body text-[13.5px] text-ink">{u.full_name}</td>
+                <td className="font-body text-[13px] text-slate">{u.email}</td>
+                <td>
+                  <span className={`users-active-pill ${u.is_active ? 'active' : 'inactive'}`}>
                     {u.is_active ? 'Active' : 'Inactive'}
                   </span>
                 </td>
-                <td className="px-4 py-3">
+                <td>
                   {me?.role === 'admin' && u.id !== me.id ? (
                     <select
                       value={u.role}
                       onChange={(e) => changeRole(u.id, e.target.value)}
-                      className="rounded-[3px] border border-ink/15 bg-white px-2 py-1 font-mono text-[11px] uppercase tracking-[0.06em] text-ink outline-none focus:border-brass"
+                      className="users-role-select"
                     >
                       {ROLES.map((r) => (
                         <option key={r} value={r}>{r}</option>
                       ))}
                     </select>
                   ) : (
-                    <span className="rounded-[2px] bg-ink/[0.06] px-2 py-0.5 font-mono text-[10.5px] uppercase tracking-[0.06em] text-slate">
+                    <span className="users-role-static">
                       {u.role}
                     </span>
                   )}
